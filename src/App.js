@@ -2,14 +2,14 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 
 const axios = require('axios');
-const rootUrl = process.env.ROOT_URL || "http://localhost:8080"
+const rootUrl = process.env.REACT_APP_ROOT_URL || "http://localhost:8080"
 
 function App() {
 
   const [list, setList] = useState([]);
 
   const callAxiosGet = () => {
-    console.log(process.env.ROOT_URL);
+    console.log(process.env.REACT_APP_ROOT_URL);
     return axios.get(`${rootUrl}/testGet`).then((res) => {
       console.log(res.data)
       return res.data;
