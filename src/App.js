@@ -7,18 +7,37 @@ const rootUrl = process.env.REACT_APP_ROOT_URL || "http://localhost:8080"
 function App() {
 
   const [list, setList] = useState([]);
+  const [input, setInput] = useState('');
 
   const callAxiosGet = () => {
-    console.log(process.env.REACT_APP_ROOT_URL);
-    return axios.get(`${rootUrl}/testGet`).then((res) => {
+    console.log("rooturl",rootUrl);
+    return axios.get(`${rootUrl}/testGet`,
+    {
+      headers: {'Access-Control-Allow-Origin': '*'}
+    }).then((res) => {
       console.log(res.data)
       return res.data;
     });
   }
   
   const callAxiosPost = () => {
-    console.log("hello")
-    axios.post(`${rootUrl}/testPost`, {name: 'helloWord'}).then((res) => {
+    axios.post(`${rootUrl}/testPost`, {name: input}).then((res) => {
+      console.log(res.data)
+      return res;
+    }).then((res) => {
+      return callAxiosGet();
+    }).then((res) => {
+      console.log(res)
+      setList(res)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const callAxiosDelete = () => {
+    axios.delete(`${rootUrl}/testDelete`, {
+      headers: {'Access-Control-Allow-Origin': '*'}
+    }).then((res) => {
       console.log(res.data)
       return res;
     }).then((res) => {
@@ -39,7 +58,9 @@ function App() {
 
   return (
     <div className="App">
+        Input: <input onChange={(event) => {setInput(event.target.value); console.log('input',event.target.value)}}></input>
         <button onClick={callAxiosPost}>post</button>
+        <button onClick={callAxiosDelete}>delete</button>
         <div>{list.map((obj) => <div>{obj.name}</div>)}</div>
     </div>
   );
