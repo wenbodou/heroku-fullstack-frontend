@@ -58,10 +58,11 @@ function App() {
 
   return (
     <div className="App">
-        Input: <input onChange={(event) => {setInput(event.target.value); console.log('input',event.target.value)}}></input>
-        <button onClick={callAxiosPost}>post</button>
-        <button onClick={callAxiosDelete}>delete</button>
-        <div>{list.map((obj) => <div>{obj.name}</div>)}</div>
+      <div>wenbo!<br /></div>
+      Input: <input onChange={(event) => {setInput(event.target.value); console.log('input',event.target.value)}}></input>
+      <button onClick={callAxiosPost}>post</button>
+      <button onClick={callAxiosDelete}>delete</button>
+      <div>{list.map((obj) => <div>{obj.name}</div>)}</div>
     </div>
   );
 }
