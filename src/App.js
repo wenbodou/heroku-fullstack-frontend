@@ -9,6 +9,7 @@ function App() {
   const [list, setList] = useState([]);
 
   const callAxiosGet = () => {
+    console.log(process.env.ROOT_URL);
     return axios.get(`${rootUrl}/testGet`).then((res) => {
       console.log(res.data)
       return res.data;
